@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+
+  <title>Bank files converter</title>
+  <link href="./main.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--Node.js <span id="node-version"></span>,
+Chromium <span id="chrome-version"></span>,
+and Electron <span id="electron-version"></span>.-->
+
+<div class="main-content">
+  <div id="drag" class="drag">
+    Drop here
+    <br>
+    Or click
+  </div>
+
+  <div id="filePath" class="result-block d-flex flex-column align-items-baseline hidden">
+    <div class="d-flex">
+      <span>Result: &#32;</span>
+      <strong id="filePathText"></strong>
+    </div>
+
+
+    <button class="hidden" id="buttonOpenFolder" type="button">Открыть папку с файлом</button>
+  </div>
+
+  <div id="loader" class="loader hidden">
+    <img src="./media/tube-spinner.svg" alt="loader">
+  </div>
+
+</div>
+
+<div id="info"></div>
+<!-- You can also require other files to run in this process -->
+
+<script src="./renderer.js"></script>
+</body>
+</html>
