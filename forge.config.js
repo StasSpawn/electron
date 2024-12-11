@@ -4,7 +4,7 @@ const {FuseV1Options, FuseVersion} = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: '/icon'
+    icon: './icon/logo-app.png'
   },
   rebuildConfig: {},
   makers: [
@@ -12,8 +12,12 @@ module.exports = {
       name: '@electron-forge/maker-squirrel',
       config: {
         certificateFile: './cert.pfx',
-        certificatePassword: process.env.CERTIFICATE_PASSWORD
-      },
+        certificatePassword: process.env.CERTIFICATE_PASSWORD,
+        config: {
+          icon: 'images/logo.ico',
+          setupIcon: 'images/logo.ico'
+        }
+      }
     },
     {
       name: '@electron-forge/maker-zip',

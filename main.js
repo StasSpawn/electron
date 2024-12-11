@@ -5,6 +5,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const {shell} = require('electron');
 
+const {updateElectronApp} = require('update-electron-app');
+updateElectronApp();
 
 
 const pathToResultFolder = 'D:\\Vizor\\Electron\\bank-files-converter\\acceptedFiles\\';
@@ -46,6 +48,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1100,
     height: 700,
+    title: 'Bank files converter ' + require('./package.json').version,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -55,7 +58,7 @@ const createWindow = () => {
   mainWindow.loadFile('index.html');
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 };
 
 // This method will be called when Electron has finished
@@ -65,12 +68,28 @@ app.whenReady().then(() => {
 
 
   // open folder with file by click
+  ipcMain.handle('open_link_in_browser', async (event, link) => {
+    exec('start ' + link)
+  });
+
+
+  ipcMain.handle('check_python', async (event) => {
+    try {
+      await exec('python /?');
+      return true
+    } catch (e) {
+      return false
+    }
+  });
+
+  // open folder with file by click
   ipcMain.handle('open_folder_with_file', async (event, pathToFile) => {
     shell.showItemInFolder(pathToFile);
   });
 
   // handle selecting file with window or drop and run process
   ipcMain.handle('pick_file', async (event, fileNameFromDrop) => {
+
     if (fileNameFromDrop) {
       // run process function with dropped file
       return await execRun(fileNameFromDrop)

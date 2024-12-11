@@ -17,7 +17,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 contextBridge.exposeInMainWorld('electronAPI', {
 
-  testFunc: (data) => ipcRenderer.invoke('pick_file', data),
+  openLinkInBrowser: (data) => ipcRenderer.invoke('open_link_in_browser', data),
+
+  pickFile: (data) => ipcRenderer.invoke('pick_file', data),
+
+  checkPython: () => ipcRenderer.invoke('check_python'),
 
   openFolderWithFile: (data) => ipcRenderer.invoke('open_folder_with_file', data)
 });

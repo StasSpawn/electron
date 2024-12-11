@@ -1,6 +1,6 @@
 {
   "name": "bank-files-converter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Electron app",
   "main": "main.js",
   "scripts": {
@@ -26,5 +26,14 @@
     "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.1",
     "update-electron-app": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StasSpawn/electron"
+  },
+  "nsis": {
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "oneClick": false
   }
 }
